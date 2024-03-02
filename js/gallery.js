@@ -81,16 +81,15 @@ function createMarkup(arr) {
 }
 galleryContainer.addEventListener("click", handleModalWindow);
 function handleModalWindow(event) {
-  if (event.currentTarget === event.target) return;
-    const currentImage = event.target.closest(".gallery-image");
-    const imageId = currentImage.dataset.source;
-    const imageSearching = images.find(({ original }) => original === imageId);
+    event.preventDefault();
+ if (!event.target.classList.contains('gallery-image')) return;
+
+  const currentImage = event.target.dataset.source;
 
 const instance = basicLightbox.create(`<div class="modal">
    
       <img
-        src="${imageSearching.original}"
-        alt="${imageSearching.description}"
+        src="${currentImage}"
       />
     
   </div>`);
